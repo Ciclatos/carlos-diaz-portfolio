@@ -17,6 +17,7 @@ El sitio posiciona a Carlos como un perfil hibrido que combina:
 - TypeScript
 - Vite
 - CSS responsive
+- Lightbox simple para capturas ampliables
 - Playwright para capturas de proyectos
 
 ## Scripts
@@ -54,7 +55,7 @@ Los datos principales estan en `src/main.tsx`:
 - Textos de perfil
 - Proyectos y tecnologias
 
-Reemplazar `contacto@carlosdiaz.dev` por el correo definitivo antes de usar el sitio en postulaciones.
+El favicon monograma se encuentra en `public/assets/favicon.svg`.
 
 ## Deploy
 

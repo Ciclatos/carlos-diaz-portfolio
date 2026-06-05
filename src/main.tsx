@@ -6,6 +6,7 @@ import {
   BrainCircuit,
   Code2,
   ExternalLink,
+  FileSearch,
   Mail,
   Music2,
   Network,
@@ -19,7 +20,7 @@ const profile = {
   title: "IA y Automatizacion | Desarrollo Web | Produccion de Contenidos Digitales",
   linkedIn: "https://www.linkedin.com/in/carlos-diaz-00a014303/",
   github: "https://github.com/Ciclatos",
-  email: "contacto@carlosdiaz.dev",
+  email: "carloseduardo151211@gmail.com",
 };
 
 const projects = [
@@ -29,9 +30,9 @@ const projects = [
     image: "/projects/phylab.jpg",
     status: "Plataforma educativa",
     description:
-      "Plataforma interactiva para Fisica I con simuladores, calculadoras, graficas dinamicas y un tutor IA contextual para reforzar el aprendizaje.",
-    technologies: ["JavaScript", "Vite", "Node.js", "Express", "Chart.js", "Three.js", "IA integrada"],
-    highlights: ["Simuladores", "Calculadoras", "Graficas", "Tutor IA"],
+      "Plataforma educativa interactiva para Fisica I con simuladores, calculadoras y graficas dinamicas. Integra conexion mediante APIs, prompts internos, validaciones de entrada y un tutor IA contextual a traves de una capa backend/proxy que ayuda a mantener la experiencia guiada, clara y segura para el aprendizaje.",
+    technologies: ["JavaScript", "Vite", "Node.js", "Express", "APIs", "Chart.js", "Three.js", "Tutor IA"],
+    highlights: ["APIs", "Prompts internos", "Validaciones", "Tutor IA contextual"],
   },
   {
     name: "Project Pulse",
@@ -39,9 +40,9 @@ const projects = [
     image: "/projects/project-pulse.jpg",
     status: "Activo y en evolucion",
     description:
-      "Herramienta experimental para generar y manipular secuencias musicales mediante IA, explorando la relacion entre creatividad, programacion y modelos inteligentes.",
-    technologies: ["IA", "Musica digital", "Interaccion creativa", "Web"],
-    highlights: ["Secuencias musicales", "Experimentacion", "Creatividad asistida"],
+      "Herramienta experimental para crear y manipular musica mediante codigo. Permite explorar secuencias, patrones y transformaciones musicales desde una interfaz programable, con IA como apoyo secundario para investigar nuevas formas de interaccion creativa.",
+    technologies: ["Musica con codigo", "Secuencias", "Programacion creativa", "IA exploratoria", "Web"],
+    highlights: ["Musica mediante codigo", "Manipulacion de patrones", "Experimentacion sonora"],
   },
   {
     name: "Amaranto Parfum",
@@ -112,7 +113,42 @@ const strengths = [
   },
 ];
 
+const focusPoints = [
+  { icon: <BrainCircuit aria-hidden="true" />, label: "Inteligencia artificial" },
+  { icon: <Workflow aria-hidden="true" />, label: "Automatizacion" },
+  { icon: <Code2 aria-hidden="true" />, label: "Desarrollo web" },
+  { icon: <Music2 aria-hidden="true" />, label: "Produccion de contenidos digitales" },
+  { icon: <FileSearch aria-hidden="true" />, label: "Investigacion y sintesis de informacion" },
+];
+
+type LightboxImage = {
+  label: string;
+  src: string;
+};
+
 function App() {
+  const [lightboxImage, setLightboxImage] = React.useState<LightboxImage | null>(null);
+
+  React.useEffect(() => {
+    if (!lightboxImage) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setLightboxImage(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [lightboxImage]);
+
   return (
     <>
       <header className="site-header">
@@ -172,8 +208,17 @@ function App() {
             <h2>Una base creativa orientada a tecnologia</h2>
           </div>
           <div className="about-grid">
-            <div className="about-photo">
-              <img src="/assets/carlos-diaz.jpg" alt="Retrato profesional de Carlos Diaz" width="720" height="900" loading="lazy" />
+            <div className="focus-card" aria-label="Puntos clave del perfil de Carlos Diaz">
+              <div className="focus-mark">CD</div>
+              <h3>Areas de enfoque</h3>
+              <div className="focus-list">
+                {focusPoints.map((point) => (
+                  <div className="focus-item" key={point.label}>
+                    {point.icon}
+                    <span>{point.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="about-text">
               <p>
@@ -238,7 +283,14 @@ function App() {
                     <div className="mini-gallery" aria-label="Pantallas internas de MedSync">
                       {project.gallery.map((item) => (
                         <figure key={item.label}>
-                          <img src={item.src} alt={`MedSync ${item.label}`} loading="lazy" />
+                          <button
+                            className="gallery-trigger"
+                            type="button"
+                            onClick={() => setLightboxImage(item)}
+                            aria-label={`Ampliar captura de MedSync: ${item.label}`}
+                          >
+                            <img src={item.src} alt={`MedSync ${item.label}`} loading="lazy" />
+                          </button>
                           <figcaption>{item.label}</figcaption>
                         </figure>
                       ))}
@@ -303,6 +355,21 @@ function App() {
           </div>
         </section>
       </main>
+
+      {lightboxImage && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Captura ampliada de MedSync: ${lightboxImage.label}`}>
+          <button className="lightbox-backdrop" type="button" onClick={() => setLightboxImage(null)} aria-label="Cerrar captura ampliada" />
+          <div className="lightbox-panel">
+            <div className="lightbox-header">
+              <span>MedSync · {lightboxImage.label}</span>
+              <button type="button" onClick={() => setLightboxImage(null)} aria-label="Cerrar lightbox">
+                Cerrar
+              </button>
+            </div>
+            <img src={lightboxImage.src} alt={`Captura ampliada de MedSync ${lightboxImage.label}`} />
+          </div>
+        </div>
+      )}
     </>
   );
 }
