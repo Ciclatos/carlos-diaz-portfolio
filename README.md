@@ -1,6 +1,10 @@
 # Carlos Diaz Portfolio
 
-Portafolio profesional de Carlos Diaz, orientado a oportunidades remotas en inteligencia artificial, automatizacion, desarrollo web, tecnologia y produccion de contenidos digitales.
+Portafolio profesional de Carlos Diaz, orientado a oportunidades en inteligencia artificial, automatizacion, desarrollo web, tecnologia y produccion de contenidos digitales.
+
+- Sitio: [carlos-diaz-portfolio.vercel.app](https://carlos-diaz-portfolio.vercel.app/)
+- GitHub: [Ciclatos](https://github.com/Ciclatos)
+- LinkedIn: [Carlos Diaz](https://www.linkedin.com/in/carlos-diaz-00a014303/)
 
 ## Enfoque
 
@@ -19,6 +23,13 @@ El sitio posiciona a Carlos como un perfil hibrido que combina:
 - CSS responsive
 - Lightbox simple para capturas ampliables
 - Playwright para capturas de proyectos
+
+## Proyectos destacados
+
+- Project Pulse: musica mediante codigo, PulseScript e IA asistida.
+- PhyLab: laboratorio virtual de Fisica I con simulaciones, graficas y tutor IA.
+- MedSync: sistema hospitalario privado para operaciones, finanzas y reportes.
+- Amaranto Parfum: prototipo de personalizacion de perfumes con IA y automatizacion.
 
 ## Scripts
 
